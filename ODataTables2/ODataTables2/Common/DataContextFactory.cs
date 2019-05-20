@@ -10,7 +10,7 @@ namespace ODataTables2.Common
             var builder = new SqlConnectionStringBuilder
             {
                 DataSource = ".",
-                InitialCatalog = "OData2", IntegratedSecurity = true
+                InitialCatalog = "OData", IntegratedSecurity = true
             };
             SqlConnection connection = new SqlConnection(builder.ConnectionString);
             DataContext dbContext = new DataContext(connection);

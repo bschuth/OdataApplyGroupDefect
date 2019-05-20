@@ -12,23 +12,25 @@ namespace ODataTables2.Controllers
     [ApiController]
     public class LocationsController : ODataController
     {
-        //[EnableQuery]
-        //public IQueryable<Location> Get()
-        //{
-        //    return DataContextFactory.GetContext().GetTable<Location>();
-        //}
-
         public ActionResult<Location> Get(ODataQueryOptions<Location> opts, string format="")
         {
-            //var table =  DataContextFactory.GetContext().GetTable<Location>();
-            //return Ok(opts.ApplyTo(table));
-            var locations = new List<Location>
-            {
-                new Location {LocationId = 1, Name = "Loc1", PersonResponsible = "foo"},
-                new Location {LocationId = 2, Name = "loc2", PersonResponsible = "bar"},
-                new Location {LocationId = 3, Name = "loc3", PersonResponsible = "foo"}
-            };
-            return Ok(opts.ApplyTo(locations.AsQueryable()));
+            // If one attempts to access /odata/locations?$apply=groupby((PersonResponsible))
+            // to this context, you get
+            // System.NotSupportedException: Comparison operators not supported
+            // for type 'Syste m.Collections.Generic.Dictionary`2[System.String, System.Object]'.
+            var table = DataContextFactory.GetContext().GetTable<Location>();
+            return Ok(opts.ApplyTo(table));
+
+            // Comment the above and uncomment the below to show
+            // $apply=groupby((PersonResponsible)) working correctly.
+
+            //var locations = new List<Location>
+            //{
+            //    new Location {LocationId = 1, Name = "Loc1", PersonResponsible = "foo"},
+            //    new Location {LocationId = 2, Name = "loc2", PersonResponsible = "bar"},
+            //    new Location {LocationId = 3, Name = "loc3", PersonResponsible = "foo"}
+            //};
+            //return Ok(opts.ApplyTo(locations.AsQueryable()));
         }
     }
 }

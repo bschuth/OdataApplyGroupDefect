@@ -25,4 +25,8 @@
     <Reference Include="System.Data.Linq" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="sql\" />
+  </ItemGroup>
+
 </Project>

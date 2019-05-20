@@ -53,10 +53,6 @@ namespace ODataTables2
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<Location>("Locations");
-            //builder.EntityType<ExpensiveStatistic>();
-            //builder.EntitySet<Operator>("Operators");
-            //builder.EntityType<LocationOperators>()
-            //    .HasKey(k => new {k.LocationId, k.OperatorId});
             return builder.GetEdmModel();
         }
     }
